@@ -28,7 +28,6 @@ admin=['uf1d4103373d5a161edf2d9d9e2d48837','ua11927d673a2ae7bab9c737e4bd206d2',n
 Family=["uf1d4103373d5a161edf2d9d9e2d48837","ua11927d673a2ae7bab9c737e4bd206d2",nadyaMID]
 RfuFamily = RfuBot + Family
 cl = nadya
-sendText =sendMessage
 #==============================================================================#
 readOpen = codecs.open("read.json","r","utf-8")
 settingsOpen = codecs.open("temp.json","r","utf-8")
@@ -279,16 +278,16 @@ def lineBot(op):
                             ret_ += "\n╠══[ {} ]".format(str(data["title"]))
                             ret_ += "\n╠ https://www.youtube.com{}".format(str(data["href"]))
                         ret_ += "\n╚══[ จำนวนที่ค้นพบ {} ]".format(len(datas))
-                        cl.sendMessage(to, str(ret_))					
+                        nadya.sendMessage(to, str(ret_))					
                 if "google " in msg.text.lower():
                     spl = re.split("google ",msg.text,flags=re.IGNORECASE)
                     if spl[0] == "":
                         if spl[1] != "":
                                 try:
                                     if msg.toType != 0:
-                                        cl.sendText(msg.to,"กำลังรับข้อมูล กรุณารอสักครู่..")
+                                       nadya.sendText(msg.to,"กำลังรับข้อมูล กรุณารอสักครู่..")
                                     else:
-                                        cl.sendText(msg.from_,"กำลังรับข้อมูล กรุณารอสักครู่..")
+                                       nadya.sendText(msg.from_,"กำลังรับข้อมูล กรุณารอสักครู่..")
                                     resp = BeautifulSoup(requests.get("https://www.google.co.th/search",params={"q":spl[1],"gl":"th"}).content,"html.parser")
                                     text = "ผลการค้นหาจาก Google:\n\n"
                                     for el in resp.findAll("h3",attrs={"class":"r"}):
@@ -306,9 +305,9 @@ def lineBot(op):
                                         text += str(el.a["href"][7:]).split("&sa=U")[0]+"\n\n"
                                     text = text[:-2]
                                     if msg.toType != 0:
-                                        cl.sendText(msg.to,str(text))
+                                        nadya.sendText(msg.to,str(text))
                                     else:
-                                        cl.sendText(msg.from_,str(text))
+                                        nadya.sendText(msg.from_,str(text))
                                 except Exception as e:
                                     print(e)
 
@@ -352,19 +351,19 @@ def lineBot(op):
                     nadya.sendContact(to, "ua11927d673a2ae7bab9c737e4bd206d2")
 
                 if msg.text in ["Speed","speed","Sp","sp",".Sp",".sp",".Speed",".speed","\Sp","\sp","\speed","\Speed","สปีด"]:
-                	start = time.time()
+                    start = time.time()
                     nadya.sendMessage(to, "การตอบสนองของบอท(。-`ω´-)")
                     elapsed_time = time.time() - start
                     nadya.sendMessage(msg.to, "[ %s Seconds ]\n[ " % (elapsed_time) + str(int(round((time.time() - start) * 1000)))+" ms ]")
 
                 if msg.text in ["ออน",".ออน","\ออน",".uptime",".Uptime"]:
-                	timeNow = time.time()
+                    timeNow = time.time()
                     runtime = timeNow - botStart
                     runtime = format_timespan(runtime)
                     nadya.sendMessage(to, "ระยะเวลาการทำงานของบอท(。-`ω´-)\n{}".format(str(runtime)))
 
                 if msg.text in ["Tag","tagall","แทค","แทก","Tagall","tag"]:
-                	group = nadya.getGroup(msg.to)
+                    group = nadya.getGroup(msg.to)
                     nama = [contact.mid for contact in group.members]
                     k = len(nama)//100
                     for a in range(k+1):
@@ -606,10 +605,10 @@ def lineBot(op):
 
                 if msg.text in [".เชคเข้า"]:
                   if msg._from in admin:
-                	nadya.sendMessage(msg.to,"เช็คข้อความตอนรับล่าสุด(。-`ω´-)" + "\n\n➤" + str(wait["acomment"]))
+                        nadya.sendMessage(msg.to,"เช็คข้อความตอนรับล่าสุด(。-`ω´-)" + "\n\n➤" + str(wait["acomment"]))
                 if msg.text in [".เชคออก"]:
                   if msg._from in admin:
-                	nadya.sendMessage(msg.to,"เช็คข้อความตอนรับออกล่าสุด(。-`ω´-)" + "\n\n➤" + str(wait["bcomment"]))
+                        nadya.sendMessage(msg.to,"เช็คข้อความตอนรับออกล่าสุด(。-`ω´-)" + "\n\n➤" + str(wait["bcomment"]))
 #=================THEFLASH====================================================#
 #==============================================================================#
                 if msg.text.lower().startswith("พูด "):
