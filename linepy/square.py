@@ -94,6 +94,45 @@ class Square(object):
         return self.square.sendMessage(rq)
 
     @loggedIn
+    def sendSquareMessageWithFooter(self, squareChatMid, text, title=None, link=None, iconlink=None, contentMetadata={}):
+        rq = SendMessageRequest()
+        rq.squareChatMid = squareChatMid
+        rq.squareMessage = SquareMessage()
+        msg = Message()
+        msg.to = squareChatMid
+        msg.text = text
+        msg.contentType = 0
+        msg.contentMetadata = self.generateMessageFooter(title, link, iconlink)
+        if contentMetadata:
+            msg.contentMetadata.update(contentMetadata)
+        rq.squareMessage.message = msg
+        rq.squareMessage.fromType = 4
+        if squareChatMid not in self._messageReq:
+            self._messageReq[squareChatMid] = -1
+        self._messageReq[squareChatMid] += 1
+        rq.squareMessage.squareMessageRevision = self._messageReq[squareChatMid]
+        return self.square.sendMessage(rq)
+
+    @loggedIn
+    def sendSquareReplyMessage(self, relatedMessageId, squareChatMid, text, contentMetadata={}, contentType=0):
+        rq = SendMessageRequest()
+        rq.squareChatMid = squareChatMid
+        rq.squareMessage = SquareMessage()
+        msg = self.generateReplyMessage(relatedMessageId)
+        msg.to = squareChatMid
+        msg.text = text
+        msg.contentType = contentType
+        msg.contentMetadata = contentMetadata
+        msg.relatedMessageServiceCode = 2
+        rq.squareMessage.message = msg
+        rq.squareMessage.fromType = 4
+        if squareChatMid not in self._messageReq:
+            self._messageReq[squareChatMid] = -1
+        self._messageReq[squareChatMid] += 1
+        rq.squareMessage.squareMessageRevision = self._messageReq[squareChatMid]
+        return self.square.sendMessage(rq)
+
+    @loggedIn
     def sendSquareSticker(self, squareChatMid, packageId, stickerId):
         contentMetadata = {
             'STKVER': '100',
