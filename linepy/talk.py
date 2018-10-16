@@ -80,6 +80,74 @@ class Talk(object):
     """
     
     @loggedIn
+    def sendMessageMusic(self, to, title=None, subText=None, url=None, iconurl=None, contentMetadata={}):
+        """
+        a : Android
+        i : Ios
+        """
+        self.profile = self.getProfile()
+        self.userTicket = self.generateUserTicket()
+        title = title if title else 'LINE MUSIC'
+        subText = subText if subText else self.profile.displayName
+        url = url if url else 'line://ti/p/' + self.userTicket
+        iconurl = iconurl if iconurl else 'https://obs.line-apps.com/os/p/%s' % self.profile.mid
+        msg = Message()
+        msg.to, msg._from = to, self.profile.mid
+        msg.text = title
+        msg.contentType = 19
+        msg.contentMetadata = {
+            'text': title,
+            'subText': subText,
+            'a-installUrl': url,
+            'i-installUrl': url,
+            'a-linkUri': url,
+            'i-linkUri': url,
+            'linkUri': url,
+            'previewUrl': iconurl,
+            'type': 'mt',
+            'a-packageName': 'com.spotify.music',
+            'countryCode': 'JP',
+            'id': 'mt000000000a6b79f9'
+        }
+        if contentMetadata:
+            msg.contentMetadata.update(contentMetadata)
+        if to not in self._messageReq:
+            self._messageReq[to] = -1
+        self._messageReq[to] += 1
+        return self.talk.sendMessage(self._messageReq[to], msg)
+
+    @loggedIn
+    def generateMessageFooter(self, title=None, link=None, iconlink=None):
+        self.profile = self.getProfile()
+        self.userTicket = self.generateUserTicket()
+        title = title if title else self.profile.displayName
+        link = link if link else 'line://ti/p/' + self.userTicket
+        iconlink = iconlink if iconlink else 'https://obs.line-apps.com/os/p/%s' % self.profile.mid
+        return {'AGENT_NAME': title, 'AGENT_LINK': link, 'AGENT_ICON': iconlink}
+
+    @loggedIn
+    def sendMessageWithFooter(self, to, text, title=None, link=None, iconlink=None, contentMetadata={}):
+        msg = Message()
+        msg.to, msg._from = to, self.profile.mid
+        msg.text = text
+        msg.contentType = 0
+        msg.contentMetadata = self.generateMessageFooter(title, link, iconlink)
+        if contentMetadata:
+            msg.contentMetadata.update(contentMetadata)
+        if to not in self._messageReq:
+            self._messageReq[to] = -1
+        self._messageReq[to] += 1
+        return self.talk.sendMessage(self._messageReq[to], msg)
+
+    @loggedIn
+    def generateReplyMessage(self, relatedMessageId):
+        msg = Message()
+        msg.relatedMessageServiceCode = 1
+        msg.messageRelationType = 3
+        msg.relatedMessageId = str(relatedMessageId)
+        return msg
+
+    @loggedIn
     def sendText(self, Tomid, text):
         msg = Message()
         msg.to = Tomid
