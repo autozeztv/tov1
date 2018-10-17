@@ -140,8 +140,16 @@ class Talk(object):
         return self.talk.sendMessage(self._messageReq[to], msg)
 
     @loggedIn
+    def ReplyMessage(self, relatedMessageId):
+        msg = Message()
+        msg.relatedMessageServiceCode = 1
+        msg.messageRelationType = 3
+        msg.relatedMessageId = str(relatedMessageId)
+        return msg
+
+    @loggedIn
     def sendReplyMessage(self, relatedMessageId, to, text, contentMetadata={}, contentType=0):
-        msg = self.generateReplyMessage(relatedMessageId)
+        msg = self.ReplyMessage(relatedMessageId)
         msg.to = to
         msg.text = text
         msg.contentType = contentType
