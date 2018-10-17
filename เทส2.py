@@ -301,7 +301,6 @@ def lineBot(op):
                         X = nadya.getGroup(msg.to)
                         X.name = msg.text.replace(".ชื่อกลุ่ม: ","")
                         nadya.updateGroup(X)
-                        nadya.sendMessage(msg.to "「 GroupName 」\n• Success")
                     else:
                         nadya.sendMessage(msg.to,"「 GroupName 」\n• Error")
 
@@ -446,7 +445,7 @@ def lineBot(op):
                     nadya.sendContact(to, "uad73a8119f2accea9e8f39e39291ac9a")
 
                 if msg.text in ["เทส"]:
-                	nadya.sendReplyMessage(to, "「 BOT TEAM 」 • H4ck")
+                    nadya.sendReplyMessage(to, "「 BOT TEAM 」 • H4ck")
 
                 if msg.text in ["Speed","speed","Sp","sp",".Sp",".sp",".Speed",".speed","\Sp","\sp","\speed","\Speed","สปีด"]:
                     start = time.time()
