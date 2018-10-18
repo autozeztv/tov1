@@ -79,7 +79,7 @@ class Talk(object):
         @dataMid List of user Mid
     """
     
-@loggedIn
+    @loggedIn
     def sendMessageMusic(self, to, title=None, subText=None, url=None, iconurl=None, contentMetadata={}):
         """
         a : Android
