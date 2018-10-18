@@ -175,7 +175,7 @@ def helpmessage():
                   "║youtube (ข้อความ)➥ค้นหาต่างๆ" + "\n" \
                   "║ขอลิ้งกลุ่ม➥ขอลิ้งกลุ่มนี้" + "\n" \
                   "║ลิ้งกลุ่ม on/off➥เปิดปิดลิ้งกลุ่ม" + "\n" \
-                  "║gift 1-2➥ ส่งของขวัญ" + "\n" \ 
+                  "║gift 1-2➥ ส่งของขวัญ" + "\n" \
                   "╚═══════════════"
     return helpMessage
     
@@ -202,7 +202,7 @@ def helptexttospeech():
                          "-ตอนรับออก on\off" + "\n" + \
                          "-ตั้งเข้า:" + "\n" + \
                          "-ตั้งออก:" + "\n" + \
-                         "-ตั้งเข้ากลุ่ม:" + "\n" + \ 
+                         "-ตั้งเข้ากลุ่ม:" + "\n" + \
                          "-เชคเข้า" + "\n" + \
                          "-เชคออก" + "\n" + \
                          "-เชคเข้ากลุ่ม" + "\n" + \
@@ -527,7 +527,7 @@ def lineBot(op):
                 if text.lower() == 'gift1':
                   nadya.sendGift(msg.to,'608','sticker')
 							
-               if text.lower() == 'gift2':
+                if text.lower() == 'gift2':
                   nadya.sendReplyMessage(msg_id,to, None, contentMetadata={'PRDID': '88efc1ed-744d-4704-a77a-bb79077f5d22','PRDTYPE': 'THEME','MSGTPL': '100'}, contentType = 9)
                   
                 if msg.text in ["Tag","tagall","แทค","แทก","Tagall","tag"]:
