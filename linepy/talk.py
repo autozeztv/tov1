@@ -79,7 +79,7 @@ class Talk(object):
         @dataMid List of user Mid
     """
     
-    @loggedIn
+@loggedIn
     def sendMessageMusic(self, to, title=None, subText=None, url=None, iconurl=None, contentMetadata={}):
         """
         a : Android
@@ -115,7 +115,7 @@ class Talk(object):
             self._messageReq[to] = -1
         self._messageReq[to] += 1
         return self.talk.sendMessage(self._messageReq[to], msg)
-
+    
     @loggedIn
     def generateMessageFooter(self, title=None, link=None, iconlink=None):
         self.profile = self.getProfile()
