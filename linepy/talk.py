@@ -461,6 +461,10 @@ class Talk(object):
     """Group"""
 
     @loggedIn
+    def getRecentMessagesV2(self, chatId, count=1001):
+        return self.talk.getRecentMessagesV2(chatId,count)
+        
+    @loggedIn
     def getChatRoomAnnouncementsBulk(self, chatRoomMids):
         return self.talk.getChatRoomAnnouncementsBulk(chatRoomMids)
 
