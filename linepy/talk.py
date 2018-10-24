@@ -168,7 +168,7 @@ class Talk(object):
         return msg
 
     @loggedIn
-    def sendPhu(self, to, text="", mids=[]):
+    def sendMention(self, to, text="", mids=[]):
         arrData = ""
         arr = []
         mention = "@zeroxyuuki "
