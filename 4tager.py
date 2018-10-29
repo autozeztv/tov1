@@ -325,7 +325,7 @@ def helptranslate():
                        "•oplistad " + "\n" + \
                        "•opsu @" + "\n" + \
                        "•deopsu @" + "\n" + \
-                       "•oplistsu " + "\n" + \ 
+                       "•oplistsu " + "\n" + \
                          "**คำสั่งเฉพาะซูเปอร์แอดมิน**"
     return helpTranslate
 #==============================================================================#
@@ -349,7 +349,7 @@ def lineBot(op):
             print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
             if settings["autoJoin"] and nadyaMID in op.param3:
                 nadya.acceptGroupInvitation(op.param1)
-                nadya.sendMention2(op.param1, settings["JoinMessage"], [op.param2])
+                nadya.sendMentionV2(op.param1, settings["JoinMessage"], [op.param2])
 
         if op.type == 15:
             if settings["bcommentOn"] and "bcomment" in settings:
