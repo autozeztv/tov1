@@ -589,9 +589,9 @@ def lineBot(op):
                                  nadya.sendMessageMusic(msg.to, teks)
                 if "/music " in msg.text:
                  if msg._from in supperadmin:
-                     spl = re.split("/music ",msg.text,flags=re.IGNORECASE)
+                     spl = re.split("/music ",msg.text)
                      if spl[0] == "":
-                        nadya.sendMessageMusic(msg.to, spl)
+                       nadya.sendMessageMusic(msg.to, spl[1])
 #==============================================================================#
                 if msg.text.lower().startswith(".เตะ "):
                   if msg._from in admin:
