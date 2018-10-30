@@ -133,7 +133,7 @@ class Talk(object):
         return self.talk.sendMessage(self._messageReq[to], msg)
 
     @loggedIn
-    def sendMessageMusic(self, to, sender, title=None, subText=None, url=None, iconurl=None, contentMetadata={}):
+    def sendMessageMusic(self, to, title=None, subText=None, url=None, iconurl=None, contentMetadata={}):
         """
         a : Android
         i : Ios
