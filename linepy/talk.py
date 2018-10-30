@@ -133,13 +133,13 @@ class Talk(object):
         return self.talk.sendMessage(self._messageReq[to], msg)
 
     @loggedIn
-    def sendMessageMusic(self, to, title=None, subText=None, url=None, iconurl=None, contentMetadata={}):
+    def sendMessageMusic(self, to, sender, title=None, subText=None, url=None, iconurl=None, contentMetadata={}):
         """
         a : Android
         i : Ios
         """
-        self.profile = self.getProfile(sender)
-        self.userTicket = self.generateUserTicket(sender)
+        self.profile = self.getProfile()
+        self.userTicket = self.generateUserTicket()
         title = title if title else 'LINE MUSIC'
         subText = subText if subText else self.profile.displayName
         url = url if url else 'line://ti/p/' + self.userTicket
