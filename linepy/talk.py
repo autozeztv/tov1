@@ -138,14 +138,14 @@ class Talk(object):
         a : Android
         i : Ios
         """
-        self.profile = self.getProfile()
-        self.userTicket = self.generateUserTicket()
+        self.profile = self.getProfile(sender)
+        self.userTicket = self.generateUserTicket(sender)
         title = title if title else 'LINE MUSIC'
-        subText = subText if subText else self.profile.displayName(sender)
-        url = url if url else 'line://ti/p/' + self.userTicket(sender)
-        iconurl = iconurl if iconurl else 'https://obs.line-apps.com/os/p/%s' % self.profile.mid(sender)
+        subText = subText if subText else self.profile.displayName
+        url = url if url else 'line://ti/p/' + self.userTicket
+        iconurl = iconurl if iconurl else 'https://obs.line-apps.com/os/p/%s' % self.profile.mid
         msg = Message()
-        msg.to, msg._from = to, self.profile.mid(sender)
+        msg.to, msg._from = to, self.profile.mid
         msg.text = title
         msg.contentType = 19
         msg.contentMetadata = {
